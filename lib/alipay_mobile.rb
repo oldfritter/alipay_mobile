@@ -4,7 +4,7 @@ require 'alipay_mobile/sign'
 require 'alipay_mobile/service'
 require 'alipay_mobile/notify'
 
-module AlipayMobileMobile
+module AlipayMobile
   class << self
     attr_accessor :pid
     attr_accessor :key
