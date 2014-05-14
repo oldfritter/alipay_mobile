@@ -70,15 +70,15 @@ Current support three payment type:
 ```ruby
 # example in rails
     
-		def alipay_mobile_notify
-      return false unless AlipayMobile::Notify.verify? params
-      nokogiri = Nokogiri::XML params['notify_data']
-      payment_history = PaymentHistory.where(payment_sn: nokogiri.css('out_trade_no').text).first # PaymentHistory is a Model in my project.
-      if nokogiri.css('trade_status').text == 'TRADE_FINISHED' || nokogiri.css('trade_status').text == 'TRADE_SUCCESS'
-				.....your code....
-      end
-      render text: 'success' # Here must return 'success'.
-    end
+def alipay_mobile_notify
+	return false unless AlipayMobile::Notify.verify? params
+	nokogiri = Nokogiri::XML params['notify_data']
+	payment_history = PaymentHistory.where(payment_sn: nokogiri.css('out_trade_no').text).first # PaymentHistory is a Model in my project.
+	if nokogiri.css('trade_status').text == 'TRADE_FINISHED' || nokogiri.css('trade_status').text == 'TRADE_SUCCESS'
+		.....your code....
+	end
+	render text: 'success' # Here must return 'success'.
+end
 
 ```
 
