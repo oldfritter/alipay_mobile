@@ -1,12 +1,22 @@
 module AlipayMobile
   class Notify
-    def self.verify?(params)
-      if Sign.verify?(params)
+    
+    class << self
+      def generate(params)
+        query = []
+        ['service', 'v', 'sec_id', 'notify_data'].each {|key| query << "#{key}=#{params[key]}" }
+        Digest::MD5.hexdigest "#{query.join('&')}#{AlipayMobile.key}"
+      end
+
+      def verify?(params)
         params = Utils.stringify_keys(params)
-        open("https://mapi.alipay.com/gateway.do?service=notify_verify&partner=#{AlipayMobile.pid}&notify_id=#{CGI.escape params['notify_id'].to_s}").read == 'true'
-      else
-        false
+        params.delete('sign_type')
+        sign = params.delete('sign')
+
+        generate(params) == sign
       end
     end
+    
+
   end
 end
