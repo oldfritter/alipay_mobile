@@ -10,7 +10,7 @@ Add this line to your application's Gemfile:
 
 
 ```ruby
-gem 'alipay_mobile', :github => 'https://github.com/oldfritter/alipay_mobile'
+gem 'alipay_mobile', :git => 'https://github.com/oldfritter/alipay_mobile.git'
 ```
 
 And then execute:
@@ -33,7 +33,18 @@ AlipayMobile.seller_email = 'YOUR_SELLER_EMAIL'
 
 ```ruby
 options = {req_id: orders.first.payment_sn, format: 'xml', v: '2.0', sec_id: 'MD5'}
-options[:req_data] = "<direct_trade_create_req><subject>#{orders.collect{|order|order.subject}.join(",").gsub(' ','')}</subject><out_trade_no>#{orders.first.out_trade_no}</out_trade_no><total_fee>#{orders.collect{|order|order.order_total_price}.sum}</total_fee><seller_account_name>#{Alipay.seller_email}</seller_account_name><call_back_url>#{orders.first.call_back_url{payment = 'alipay_mobile'}}</call_back_url><notify_url>#{orders.first.notify_url{payment = 'alipay_mobile'}}</notify_url><out_user>#{orders.first.out_user}</out_user><merchant_url>#{orders.first.merchant_url{payment = 'alipay_mobile'}}</merchant_url><pay_expire>3600</pay_expire><payment_type>1</payment_type></direct_trade_create_req>"
+options[:req_data] = "<direct_trade_create_req>
+<subject>#{order.subject}</subject>
+<out_trade_no>#{order.out_trade_no}</out_trade_no>
+<total_fee>#{order.order_total_price}</total_fee>
+<seller_account_name>#{Alipay.seller_email}</seller_account_name>
+<call_back_url>#{call_back_url}</call_back_url>
+<notify_url>#{notify_url}</notify_url>
+<out_user>#{order.out_user}</out_user>
+<merchant_url>#{merchant_url}</merchant_url>
+<pay_expire>3600</pay_expire>
+<payment_type>1</payment_type>
+</direct_trade_create_req>".gsub(/[\r\n]+/,'')
 
 #获取token:
 url = AlipayMobile::Service.mobile_web_instant_credit_authorization(options)
@@ -60,7 +71,7 @@ redirect_to payment_url
 You can redirect user to this payment url, and user will see a payment page for his/her order.
 
 Current support three payment type:
-```
+```ruby
  AlipayMobile::Service#mobile_web_instant_credit_authorization	# 手机网页即时到账授权接口
  AlipayMobile::Service#mobile_web_instant_credit_transaction_url 	# 手机网页即时到账交易接口
 ```
@@ -69,7 +80,8 @@ Current support three payment type:
 
 ```ruby
 # example in rails
-    
+require 'nokogiri'
+
 def alipay_mobile_notify
 	return false unless AlipayMobile::Notify.verify? params
 	nokogiri = Nokogiri::XML params['notify_data']
@@ -84,4 +96,4 @@ end
 
 ## Contributing
 
-Bug report or pull request are welcome.
+Bug report or pull request are welcome. leon.zcf(at)gmail.com
