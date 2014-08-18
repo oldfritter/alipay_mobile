@@ -10,7 +10,7 @@ Add this line to your application's Gemfile:
 
 
 ```ruby
-gem 'alipay_mobile', :github => 'https://github.com/oldfritter/alipay_mobile'
+gem 'alipay_mobile', :git => 'https://github.com/oldfritter/alipay_mobile.git'
 ```
 
 And then execute:
@@ -60,8 +60,8 @@ redirect_to payment_url
 You can redirect user to this payment url, and user will see a payment page for his/her order.
 
 Current support three payment type:
-```
- AlipayMobile::Service#mobile_web_instant_credit_authorization	# 手机网页即时到账授权接口
+```ruby
+ AlipayMobile::Service#mobile_web_instant_credit_authorization	        # 手机网页即时到账授权接口
  AlipayMobile::Service#mobile_web_instant_credit_transaction_url 	# 手机网页即时到账交易接口
 ```
 
@@ -84,4 +84,4 @@ end
 
 ## Contributing
 
-Bug report or pull request are welcome.
+Bug report or pull request are welcome. leon.zcf(at)gmail.com
