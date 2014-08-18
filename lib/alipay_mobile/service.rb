@@ -44,7 +44,7 @@ module AlipayMobile
 
     def self.check_required_options(options, names)
       names.each do |name|
-        warn("Ailpay Warn: missing required option: #{name}") unless options.has_key?(name)
+        warn("AlipayMobile Warn: missing required option: #{name}") unless options.has_key?(name)
       end
     end
   end
