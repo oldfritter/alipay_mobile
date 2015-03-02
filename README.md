@@ -57,7 +57,7 @@ options = {
 	_input_charset: 'utf-8',
 	partner: AlipayMobile.pid,
 	seller_email: AlipayMobile.seller_email,
-	req_id: orders.first.payment_sn, 
+	req_id: order.uniq_id, 
 	format: 'xml', 
 	v: '2.0', 
 	sec_id: 'MD5'
