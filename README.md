@@ -16,7 +16,7 @@ gem 'alipay_mobile', :git => 'https://github.com/oldfritter/alipay_mobile.git'
 And then execute:
 
 ```sh
-$ bundle
+$ bundle install
 ```
 
 ## Usage
