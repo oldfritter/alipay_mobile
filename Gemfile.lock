@@ -7,9 +7,11 @@ GEM
   remote: https://rubygems.org/
   specs:
     fakeweb (1.3.0)
-    mini_portile2 (2.4.0)
-    nokogiri (1.10.8)
-      mini_portile2 (~> 2.4.0)
+    mini_portile2 (2.5.1)
+    nokogiri (1.11.4)
+      mini_portile2 (~> 2.5.0)
+      racc (~> 1.4)
+    racc (1.5.2)
     rake (12.3.3)
 
 PLATFORMS
@@ -19,7 +21,7 @@ DEPENDENCIES
   alipay_mobile!
   bundler (~> 1.3)
   fakeweb
-  nokogiri (~> 1.10.4)
+  nokogiri (~> 1.11.4)
   rake
 
 BUNDLED WITH
